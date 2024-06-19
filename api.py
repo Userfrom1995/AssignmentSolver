@@ -10,6 +10,8 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from docx import Document
 import warnings
+from collections.abc import Sequence
+
 
 warnings.simplefilter("ignore", PendingDeprecationWarning)
 
@@ -34,8 +36,8 @@ class MyClass:
         self.value = value
     
     
-    def __str__(self):
-        return f"{self.value})"
+    # def __str__(self):
+    #     return f"{self.value})"
 
 
 
@@ -52,12 +54,25 @@ def save_to_pdf(text, output_file_path):
     # Save the PDF file
     c.save()
 
-def save_to_word(text, output_file_path):
+# def save_to_word(text, output_file_path):
+#     # Create a new Word document
+#     doc = Document()
+#
+#     # Add a paragraph with the text to the document
+#     doc.add_paragraph(text)
+#
+#     # Save the Word document
+#     doc.save(output_file_path)
+
+def save_to_word_from_chat_completion(chat_completion, output_file_path):
     # Create a new Word document
     doc = Document()
 
-    # Add a paragraph with the text to the document
-    doc.add_paragraph(text)
+    # Extract content from the ChatCompletionMessage
+    content = chat_completion.choices[0].message.content
+
+    # Add a paragraph with the extracted content to the document
+    doc.add_paragraph(content)
 
     # Save the Word document
     doc.save(output_file_path)
@@ -83,8 +98,7 @@ def classify_and_correct_text(text):
         messages=[
             {
                 "role": "system",
-                "content": "Your question identifier so I'm gonna provide you with input and text form and your job is to identify the questions and label them according to well structured way and with question numbers and store every portion in object name question and the number of that question for example for question number one you will store that in the object name question 1 ",
-            },
+                   "content": "solve the question in well structured way"   },
             {
                 "role": "user",
                 "content": [
@@ -116,13 +130,17 @@ def classify_and_correct_text(text):
     # corrected_text = completion['choices'][0]['message']['content'][0]['text']
     # return corrected_text
     # Create an instance of the class
-    obj = MyClass(completion)
-    string = str(obj)
+    # obj = MyClass(completion)
+    # string = str(obj)
     
 
     # Print the response
-    return string
-    
+    return completion
+     # for chunk in completion:
+     #         if chunk.choices[0].delta.content:
+     #           print(chunk.choices[0].delta.content, end="", flush=True)
+     #           new_message["content"] += chunk.choices[0].delta.content)
+     #
     
 
 
@@ -158,7 +176,7 @@ if __name__ == "__main__":
     print(corrected_text1)
 
     # save_to_pdf(corrected_text1, "Answers/output.pdf")
-    save_to_word(corrected_text1, "Answers/output.docx")
+    save_to_word_from_chat_completion(corrected_text1, "Answers/output.docx")
 
     # corrected_text1 = corrected_text.replace('\\n', '\n')
     # Print the corrected text
