@@ -1,0 +1,91 @@
+<div class="container card-0 justify-content-center">
+  <div class="card-body px-sm-4 px-0">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-10 col">
+        <h3 class="font-weight-bold ml-md-0 mx-auto text-center text-sm-left">ASSIGNMENT SOLVER</h3>
+      </div>
+    </div>
+    <div class="row justify-content-center round">
+      <div class="col-lg-10 col-md-12">
+        <div class="card shadow-lg card-1">
+          <div class="card-body inner-card">
+            <form (ngSubmit)="onSubmit(assignmentForm)" #assignmentForm="ngForm">
+              <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="first-name">Name</label>
+                    <input type="text" class="form-control" id="first-name" name="name" ngModel>
+                  </div>
+                  <div class="form-group">
+                    <label for="Mobile-Number">Email</label>
+                    <input type="text" class="form-control" id="Mobile-Number" name="email" ngModel>
+                  </div>
+                  <div class="form-group">
+                    <label for="time">Subject</label>
+                    <input type="text" class="form-control" id="time" name="subject" ngModel>
+                  </div>
+                  <div class="form-group">
+                    <label for="skill">Academic Level</label>
+                    <input type="text" class="form-control" id="skill" name="academicLevel" ngModel>
+                  </div>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="last-name">Any other info you would like model to know before solving Assignment</label>
+                    <input type="text" class="form-control" id="last-name" name="additionalInfo" ngModel>
+                  </div>
+                  <div class="form-group">
+                    <label for="Evaluate Budget">Grade/Semester/Year</label>
+                    <input type="text" class="form-control" id="Evaluate Budget" name="gradeSemesterYear" ngModel>
+                  </div>
+                  <div class="form-group">
+                    <label for="Company-Name">Institution Name</label>
+                    <input type="text" class="form-control" id="Company-Name" name="institutionName" ngModel>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-10 col-12">
+                  <div class="form-group files">
+                    <label class="my-auto">Upload Your File</label>
+                    <input id="file" type="file" class="form-control" (change)="onFileChange($event)" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Progress bar -->
+              <div *ngIf="isLoading" class="row justify-content-center">
+                <div class="col-md-12 col-lg-10 col-12">
+                  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="row justify-content-end mb-5">
+                <div class="col-lg-4 col-auto">
+                  <button type="submit" class="btn btn-primary btn-block" [disabled]="isLoading">
+                    <small class="font-weight-bold">Start Solving</small>
+
+
+                  </button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- app.component.html -->
+<div>
+  <app-solve></app-solve>
+  <app-download></app-download>
+  <!-- Render the solve component with documentReady event -->
+<!--  <app-solve [documentReadyEvent]="documentReady"></app-solve>-->
+
+  <!-- Render the download component -->
+<!--  <app-download></app-download>-->
+</div>
+
