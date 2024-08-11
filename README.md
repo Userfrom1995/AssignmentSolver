@@ -67,7 +67,7 @@ After the installation is complete, start the server:
     ```
 2. **Give Execute Permissions to the Setup Script:**
     ```bash
-    chmod +x setup.sh
+    chmod +x Ubuntusetup.sh
     ```
 
 3. **Configure API Key:**
@@ -77,7 +77,7 @@ After the installation is complete, start the server:
 
 4. **Run the Setup Script:**
     ```bash
-    ./setup.sh
+    ./Ubuntusetup.sh
     ```
 
 #### Frontend Setup (Ubuntu)
